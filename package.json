@@ -1,6 +1,6 @@
 {
   "name": "@unibeautify/beautifier-php-codesniffer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "PHP_CodeSniffer beautifier for Unibeautify",
   "main": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",
