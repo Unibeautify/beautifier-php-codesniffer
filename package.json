@@ -27,9 +27,9 @@
   "author": "Glavin Wiechert",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Unibeautify/beautifier-codesniffer/issues"
+    "url": "https://github.com/Unibeautify/beautifier-php-codesniffer/issues"
   },
-  "homepage": "https://github.com/Unibeautify/beautifier-codesniffer#readme",
+  "homepage": "https://github.com/Unibeautify/beautifier-php-codesniffer#readme",
   "peerDependencies": {
     "unibeautify": ">= 0.15.0"
   },
