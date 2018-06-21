@@ -3,7 +3,7 @@ import {
   BeautifierBeautifyData,
   DependencyType,
   ExecutableDependency,
-  RunOptions
+  RunOptions,
 } from "unibeautify";
 import * as readPkgUp from "read-pkg-up";
 import * as fs from "fs";
@@ -19,11 +19,11 @@ export const beautifier: Beautifier = {
       description: "Build Status",
       url:
         "https://travis-ci.com/Unibeautify/beautifier-php-codesniffer.svg?branch=master",
-      href: "https://travis-ci.com/Unibeautify/beautifier-php-codesniffer"
-    }
+      href: "https://travis-ci.com/Unibeautify/beautifier-php-codesniffer",
+    },
   ],
   options: {
-    PHP: true
+    PHP: true,
   },
   dependencies: [
     {
@@ -40,35 +40,37 @@ export const beautifier: Beautifier = {
           description: "Build Status",
           url:
             "https://travis-ci.org/squizlabs/PHP_CodeSniffer.svg?branch=phpcs-fixer",
-          href: "https://travis-ci.org/squizlabs/PHP_CodeSniffer"
+          href: "https://travis-ci.org/squizlabs/PHP_CodeSniffer",
         },
         {
           description: "Code Consistency",
           url:
-            "https://squizlabs.github.io/PHP_CodeSniffer/analysis/squizlabs/PHP_CodeSniffer/grade.svg",
+            "https://squizlabs.github.io/PHP_CodeSniffer/analysis/squizlabs/PHP_CodeSniffer" +
+            "/grade.svg",
           href:
-            "https://squizlabs.github.io/PHP_CodeSniffer/analysis/squizlabs/PHP_CodeSniffer"
+            "https://squizlabs.github.io/PHP_CodeSniffer/analysis/squizlabs/PHP_CodeSniffer",
         },
         {
           description: "Gitter",
           url: "https://badges.gitter.im/Join%20Chat.svg",
           href:
-            "https://gitter.im/squizlabs/PHP_CodeSniffer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"
-        }
-      ]
-    }
+            "https://gitter.im/squizlabs/PHP_CodeSniffer?utm_source=badge&utm_medium=badge&" +
+            "utm_campaign=pr-badge&utm_content=badge",
+        },
+      ],
+    },
   ],
   resolveConfig: ({ filePath, projectPath }) => {
     const configFiles: string[] = [
       "phpcs.xml",
       "phpcs.xml.dist",
       "phpcs.ruleset.xml",
-      "ruleset.xml"
+      "ruleset.xml",
     ];
     return findFile({
       finishPath: projectPath,
       startPath: filePath,
-      fileNames: configFiles
+      fileNames: configFiles,
     })
       .then(configFile => ({ filePath: configFile }))
       .catch(err => {
@@ -82,33 +84,33 @@ export const beautifier: Beautifier = {
     dependencies,
     filePath,
     beautifierConfig,
-    projectPath
+    projectPath,
   }: BeautifierBeautifyData) {
     const phpcbf = dependencies.get<ExecutableDependency>("PHPCBF");
     const rootDir = projectPath || (filePath && path.basename(filePath));
     const relFilePath =
       filePath && rootDir && relativizePaths([filePath], rootDir)[0];
     const args = [relFilePath && `--stdin-path=${relFilePath}`, "-"];
-    const options: RunOptions = rootDir ? { cwd: rootDir } : {};
+    const options: RunOptions = rootDir
+      ? {
+          cwd: rootDir,
+        }
+      : {};
     return phpcbf
-      .run({
-        args,
-        stdin: text,
-        options
-      })
+      .run({ args, stdin: text, options })
       .then(({ exitCode, stderr, stdout }) => {
         if (stderr) {
           return Promise.reject(stderr);
         }
         return Promise.resolve(stdout);
       });
-  }
+  },
 };
 
 function findFile({
   finishPath = "/",
   startPath = finishPath,
-  fileNames
+  fileNames,
 }: {
   startPath: string | undefined;
   finishPath: string | undefined;
