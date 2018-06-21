@@ -1,0 +1,38 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=d08d65ec796779625ef7cbb37a70c729865df0dbff02a68c22e843105a94f4ad
+language: node_js
+node_js:
+  - "8"
+  - "6"
+  - "10"
+os:
+  - linux
+  - osx
+cache:
+  directories:
+  - node_modules # NPM packages
+before_script:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      curl -L http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -o php-cs-fixer;
+      sudo chmod a+x php-cs-fixer;
+      sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer;
+      curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter;
+    elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      brew install php-cs-fixer;
+      curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc-test-reporter;
+    else
+      echo Error:TRAVIS_OS_NAME && exit 1;
+    fi
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script:
+  - php-cs-fixer --version
+  - npm run build
+  - npm test
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+notifications:
+  email:
+    on_success: never
+    on_failure: change
