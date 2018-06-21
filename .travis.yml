@@ -13,7 +13,7 @@ cache:
   directories:
   - node_modules # NPM packages
 before_script:
-  - curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar -o phpcbf
+  - curl -L https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar -o phpcbf
   - ls -la
   - sudo chmod a+x ./phpcbf || true
   - which phpcbf || true
