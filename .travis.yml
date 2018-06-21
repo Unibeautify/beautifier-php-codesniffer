@@ -1,6 +1,6 @@
 env:
   global:
-    # - CC_TEST_REPORTER_ID=d08d65ec796779625ef7cbb37a70c729865df0dbff02a68c22e843105a94f4ad
+    - CC_TEST_REPORTER_ID=efa5aa59a604b59fd9ea9e4280cb9a81f0fc6c058212e81f951af54c7f19d46e
 language: node_js
 node_js:
   - "8"
@@ -14,23 +14,23 @@ cache:
   - node_modules # NPM packages
 before_script:
   - curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar -o phpcbf
-  - sudo chmod q+x phpcbf
+  - sudo chmod a+x phpcbf
   - sudo mv phpcbf /usr/local/bin/phpcbf
-  # - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-  #     curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter;
-  #   elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-  #     curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc-test-reporter;
-  #   else
-  #     echo Error:TRAVIS_OS_NAME && exit 1;
-  #   fi
-  # - chmod +x ./cc-test-reporter
-  # - ./cc-test-reporter before-build
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter;
+    elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc-test-reporter;
+    else
+      echo Error:TRAVIS_OS_NAME && exit 1;
+    fi
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
   - phpcbf --version
   - npm run build
   - npm test
-# after_script:
-#   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 notifications:
   email:
     on_success: never
