@@ -20,7 +20,7 @@ jest.setTimeout(10000);
       languageName: "PHP",
       options: {
         PHP: {
-          "PHP-CS-Fixer": {
+          "PHP_CodeSniffer": {
             prefer_beautifier_config: true
           }
         } as any,

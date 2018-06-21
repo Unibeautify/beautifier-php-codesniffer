@@ -5,6 +5,7 @@ import { newUnibeautify, Beautifier } from "unibeautify";
 import beautifier from "../../src";
 import { raw } from "../utils";
 
+jest.setTimeout(10000);
 describe("should successfully beautify PHP files", () => {
   // tslint:disable:mocha-no-side-effect-code
   testFile("test1.php");
