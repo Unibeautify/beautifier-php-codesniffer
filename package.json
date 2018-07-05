@@ -1,0 +1,55 @@
+{
+  "name": "@unibeautify/beautifier-php-codesniffer",
+  "version": "0.1.1",
+  "description": "PHP_CodeSniffer beautifier for Unibeautify",
+  "main": "dist/src/index.js",
+  "typings": "dist/src/index.d.ts",
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "npm run clean && npm run compile",
+    "clean": "rimraf dist",
+    "jest": "jest",
+    "test": "npm-run-all build lint jest",
+    "compile": "tsc",
+    "lint": "tslint '{src,test}/**/*.ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Unibeautify/beautifier-php-codesniffer.git"
+  },
+  "keywords": [
+    "php",
+    "codesniffer",
+    "php_codesniffer",
+    "unibeautify",
+    "beautifier"
+  ],
+  "author": "Glavin Wiechert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Unibeautify/beautifier-php-codesniffer/issues"
+  },
+  "homepage": "https://github.com/Unibeautify/beautifier-php-codesniffer#readme",
+  "peerDependencies": {
+    "unibeautify": ">= 0.15.0"
+  },
+  "devDependencies": {
+    "@types/jest": "22.2.3",
+    "@types/node": "10.1.1",
+    "@types/read-pkg-up": "3.0.1",
+    "@types/tmp": "0.0.33",
+    "jest": "23.1.0",
+    "npm-run-all": "4.1.2",
+    "rimraf": "2.6.2",
+    "ts-jest": "22.4.4",
+    "tslint": "5.9.1",
+    "tslint-clean-code": "0.2.7",
+    "tslint-microsoft-contrib": "5.0.3",
+    "typescript": "2.8.3",
+    "unibeautify": "0.15.0"
+  },
+  "dependencies": {
+    "read-pkg-up": "^3.0.0",
+    "tmp": "0.0.33"
+  }
+}
