@@ -9,7 +9,7 @@ import * as readPkgUp from "read-pkg-up";
 import * as fs from "fs";
 import * as path from "path";
 
-const pkg = readPkgUp.sync({ cwd: __dirname })!.package;
+const pkg = readPkgUp.sync({ cwd: __dirname })!.packageJson;
 
 export const beautifier: Beautifier = {
   name: "PHP_CodeSniffer",
