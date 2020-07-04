@@ -87,7 +87,7 @@ export const beautifier: Beautifier = {
     projectPath,
   }: BeautifierBeautifyData) {
     const phpcbf = dependencies.get<ExecutableDependency>("PHPCBF");
-    const rootDir = projectPath || (filePath && path.basename(filePath));
+    const rootDir = projectPath || (filePath && path.dirname(filePath));
     const relFilePath =
       filePath && rootDir && relativizePaths([filePath], rootDir)[0];
     const args = [relFilePath && `--stdin-path=${relFilePath}`, "-"];
